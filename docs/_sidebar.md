@@ -1,8 +1,11 @@
 - Basics
   - [Overview](basics/overview.md)
 - Unit 0 Prerequisite Reviews
-  - [Review](Unit0/topics.md)
+  - [Topic List](Unit0/topics.md)
   - [Selected Topics](Unit0/selected_topics.md)
-- Unit 1 Linear Classifier
-  - [Perceptron](Unit1/perceptron.md)
+- Unit 1 Linear Classifiers & Generalization
+  - [Linear Classifier & Perceptron](Unit1/lec1_2.md)
+  - [Large Margin as Optimization](Unit1/lec3.md)
+  - [Classification & Generalization](Unit1/lec4.md)
+  - [Problem 1](Unit1/prob1.md)
 - **Project Documentation**

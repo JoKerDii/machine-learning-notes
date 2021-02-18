@@ -264,7 +264,7 @@ $$
 
 When treating $x$ as a constant and differentiating w.r.t $\theta$:
 $$
-\displaystyle  \displaystyle \nabla _{\theta }L(x,\theta )=\begin{pmatrix}  \frac{\partial }{\partial \theta _1}L(x,\theta )\\ \vdots \\ \frac{\partial }{\partial \theta _ n}L(x,\theta )\end{pmatrix}.
+\displaystyle \nabla _{\theta }L(x,\theta )=\begin{pmatrix}  \frac{\partial }{\partial \theta _1}L(x,\theta )\\ \vdots \\ \frac{\partial }{\partial \theta _ n}L(x,\theta )\end{pmatrix}.
 $$
 
 > #### **Exercise 7:**
@@ -412,3 +412,7 @@ The **sum of the eigenvalues** is always equal to the **trace** of the matrix.
 http://www.math.lsa.umich.edu/~glarose/classes/calcIII/
 
 http://faculty.bard.edu/belk/math213
+
+http://cs229.stanford.edu/section/cs229-linalg.pdf
+
+http://cs229.stanford.edu/section/cs229-prob.pdf
