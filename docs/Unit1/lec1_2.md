@@ -34,32 +34,44 @@ Given $\theta$ and $\theta_0$, a **linear classifier** $h:X→{−1,0,+1}$ is a 
 >
 > > **Solution**: By the convention of linear classification, because $y^{(i)}$ is a label, it can take −1 or +1. Note that 0 is not a possible value.
 
-## 2. The Perceptron Algorithm
+## 2. The Perceptron Algorithm with 0-1 Loss
 
 The perceptron algorithm without offset: 
 
 $$
-\text{Perceptron}(\{(x^{(i)},y^{(i)}),i=1,...,n\},T):\\
-\text{initialize} \theta=0\text{(vector)}; ~~~~~~~~~~~~~~~~~\\
-\text{for } t=1,...,T \text{do}~~~~~~~~~~~~~~~~~\\
-\text{for } i=1,...,n \text{do}~~~~~~~~~~\\
-~~~~~~~\text{if } y^{(i)}(\theta⋅x^{(i)})≤0 \text{then}\\
+\text{Perceptron }(\{(x^{(i)},y^{(i)}),i=1,...,n\},T):\\
+\text{initialize } \theta=0\text{(vector)}; ~~~~~~~~~~~~~~~~~\\
+\text{for } t=1,...,T \text{ do}~~~~~~~~~~~~~~~~~\\
+\text{for } i=1,...,n \text{ do}~~~~~~~~~~\\
+~~~~~~~\text{if } y^{(i)}(\theta⋅x^{(i)})≤0 \text{ then}\\
 ~~~~~~~~~~~~~~\text{update } \theta=\theta+y^{(i)}x^{(i)}\\
 $$
 
 
 The perceptron algorithm with offset: 
 $$
-\text{Perceptron}(\{(x^{(i)},y^{(i)}),i=1,...,n\},T):\\
-\text{initialize} \theta=0\text{(vector)}; \theta_0 = 0 \text{(scalar)}\\
-\text{for } t=1,...,T \text{do}~~~~~~~~~~~~~~~~~\\
-\text{for } i=1,...,n \text{do}~~~~~~~~~~\\
-~~~~~~~\text{if } y^{(i)}(\theta⋅x^{(i)})≤0 \text{then}\\
+\text{Perceptron }(\{(x^{(i)},y^{(i)}),i=1,...,n\},T):\\
+\text{initialize } \theta=0\text{(vector)}; \theta_0 = 0 \text{(scalar)}\\
+\text{for } t=1,...,T \text{ do}~~~~~~~~~~~~~~~~~\\
+\text{for } i=1,...,n \text{ do}~~~~~~~~~~\\
+~~~~~~~\text{if } y^{(i)}(\theta⋅x^{(i)})≤0 \text{ then}\\
 ~~~~~~~~~~~~~~\text{update } \theta=\theta+y^{(i)}x^{(i)}\\
 ~~~~~~~~~~~~\text{update } \theta_0=\theta_0+y^{(i)}\\
 $$
 
-#### *A **geometrical description** of updating decision boundary:
+Average Perceptron Algorithm:
+
+* In this case, all contributions are averaged out. This is to prevent a big jump from old $\theta$ to new $\theta$ in each iteration. The returned parameters $\theta$  are an average of the $\theta$s across the $nT$ steps:
+
+$$
+θ_{final}={1\over nT}(θ^{(1)}+θ^{(2)}+...+θ^{(nT)})
+$$
+
+* The problem is that by going through the data in one iteration, updates made to $\theta$ s can cause the data that was processed earlier to be misclassified. So going through multiple iterations could correct this.
+
+
+
+#### A **geometrical description** of updating decision boundary:
 
 Let's initiate $\theta = 0$, assume there is no offset, and we have two points - one with positive label and one with negative label. For the 1st point with $y^1 = 1$, if $y^1(\theta x^1) < 0$, then $\theta = \theta + y^1 x^1 = x^1$. For the 2nd point with $y^1 = -1$, if $y^2(\theta x^2) < 0$, then $\theta = \theta + y^2 x^2 = x^1 - x^2$.
 
@@ -87,6 +99,8 @@ This is desirable since $\theta$ is the normal vector of the decision boundary, 
 > > $$
 > > This is desirable, since the update of $\theta$ always decrease the training error.
 
+
+
 ## 3. Perceptron Training Error
 
 For a given example $i$, we defined the training error as 1 if  $y^{(i)}(\theta \cdot x^{(i)} + \theta _0) \leq 0$, and 0 otherwise:
@@ -107,4 +121,38 @@ $$
 > > **Answer**: BC
 >
 > > **Solution**: $\big [\big [ y^{(i)}(\theta \cdot x + \theta _0) \leq 0 \big ]\big ]$ becomes 0 or stays 1.
+
+
+
+## 4. *Pegasos Algorithm
+
+Please refer to [original paper](https://link.springer.com/article/10.1007/s10107-010-0420-4) for more information.
+
+The update rule of Pegasos Algorithm without offset:
+$$
+\text{Pegasos update rule } \left(x^{(i)}, y^{(i)}, \lambda , \eta , \theta \right):\\
+\text{if } y^{(i)}(\theta \cdot x^{(i)}) \leq 1 \text{ then}~~~~~~~~~~~~~~~~~~~\\
+~~~~\text{update } \theta = (1 - \eta \lambda ) \theta + \eta y^{(i)}x^{(i)}\\
+\text{else: }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+\text{update } \theta = (1 - \eta \lambda ) \theta~~~~~~~~~~~~~~\\
+$$
+
+The update rule of Pegasos Algorithm with offset:
+$$
+\text{Pegasos update rule } \left(x^{(i)}, y^{(i)}, \lambda , \eta , \theta \right):\\
+\text{if } y^{(i)}(\theta \cdot x^{(i)}) \leq 1 \text{ then}~~~~~~~~~~~~~~~~~~~\\
+~~~~\text{update } \theta = (1 - \eta \lambda ) \theta + \eta y^{(i)}x^{(i)}\\
+~~~~\text{update } \theta_0 = \theta_0 + \eta y^{(i)}~~~~~~~~~~~~~~~~\\
+\text{else: }~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
+\text{update } \theta = (1 - \eta \lambda ) \theta~~~~~~~~~~~~~~\\
+$$
+
+where The $\eta$ parameter is a decaying factor that will decrease over time. The $\lambda$ parameter is a regularizing parameter. Note that the magnitude of $\theta_0$ should not be penalized.
+
+#### Good ideas in Pegasos Algorithm:
+
+* Regularization
+* Hinge loss
+* Subgradient updates
+* Decaying learning rate
 

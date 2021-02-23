@@ -72,13 +72,50 @@ $$
 $$
 Note that there are **infinitely** many $(\theta, \theta_0)$ that satisfy $y^{(i)} (\theta \cdot x^{(i)} + \theta _0) >= 1$ for $i = 1, ..., n$, since there is no other constraint and $\theta$ and $\theta_0$ are continuous.
 
-#### *Explain the relationship with the minimizing the objective function:
+#### Explain the relationship with minimizing the objective function:
 
 $$
 J(\theta , \theta _0) = \frac{1}{n} \sum _{i=1}^{n} \text {Loss}_ h (y^{(i)} (\theta \cdot x^{(i)} + \theta _0 )) + \frac{\lambda }{2} \mid \mid \theta \mid \mid ^2
 $$
 
 In the realizable case, we can always find a decision boundary such that the Hinge Loss term is 0. Thus the objective function is reduced to $\frac{\lambda }{2} \mid \mid \theta \mid \mid ^2$, and our goal of minimizing $J$ is reduced to find $\theta$ that minimize $\frac{1}{2} \mid \mid \theta \mid \mid ^2$.
+
+#### Explain how SVM maximizes margin and minimizes hinge loss:
+
+Given dataset $D = {(x^i, y^i)}, i=1,...,n$, the distance from point $i$ to decision boundary is defined as:
+$$
+\gamma = \frac{y^i(\theta x^i + \theta_0)}{\| \theta \|}
+$$
+The decision boundary should:
+$$
+\min_{(x^i, y^i) \in D} \gamma (x^i, y^i,\theta, \theta_0)
+$$
+The Hinge Loss function is defined as:
+$$
+L_h = f(\frac{\gamma}{\gamma_{ref}}) = \begin{cases} 1-\frac{\gamma}{\gamma_{ref}}  & \text{ if } \gamma < \gamma_{ref} \\ 0 & \text { otherwise} \end{cases}
+$$
+where $\gamma_{ref}$ is the margin of the decision boundary.
+
+Regularization makes the model more generalizable, which $\max \gamma_{ref}$  or $\min \frac{1}{\gamma_{ref}}$ or conveniently $\min \frac{1}{\gamma_{ref}^2}$.
+
+Given above information, for SVM, the cost function is defined as
+$$
+J = \frac{1}{n} \sum^n_{i=1} L_h(\frac{\gamma}{\gamma_{ref}}) + \alpha (\frac{1}{\gamma_{ref}^2})
+$$
+where $\gamma_{ref}$ can be represented in terms of $\theta$ and $\theta_0$
+
+Note: we can scale $\theta$ without changing the decision boundary, because $\theta$ describes the orientation of the normal vectors, by scaling $\theta$ , the slope of the decision boundary does not change.
+
+With $\gamma_{ref} = \frac{y^m(\theta x^m + \theta_0)}{\|\theta\|}$, scale $\theta$ such that
+$$
+y^m(\theta x^m + \theta_0) = 1 \\
+\gamma_{ref} =  \frac{1}{\| \theta \|}
+$$
+Plug in the $\gamma_{ref}$, we got cost function:
+$$
+J = \frac{1}{n} \sum^n_{i=1}L_h(y^i(\theta x^i + \theta_0)) + \alpha \|\theta\|^2
+$$
+
 
 > #### Summary
 >

@@ -83,8 +83,8 @@ $$
 >> $$
 >> v - \frac{(\frac{(v \cdot \theta) + \theta_0}{\| \theta \|}) \cdot \theta}{ \| \theta \|}
 >> $$
->> **Solution**:
 >
+>> **Solution**:
 >> Since $v−x$ is collinear with the normal, $v−x=\lambda \theta$ for some $\lambda$. Also, $x$ lies in the plane, so $\theta \cdot x + \theta_0 = 0$. 
 >> $$
 >> \displaystyle  (v - \lambda \theta )\cdot \theta + \theta _0 = 0
@@ -115,13 +115,9 @@ $$
 >> $$
 >
 >> **Solution**:
->
 >> Define a plane: $\theta_1 \cdot x + \theta_2 \cdot y + \theta_0 = 0$, and a point $p$ outside of the plane $(x_1, y_1)$.
->
 >> Find a random point $r$ on the plane: $(x_0, y_0)$.
->
 >> So the vector $h$ from $r$ to $p$ is : $h = p-r = [x_1 - x_0, y_1 - y_0]$.
->
 >> The projection from $h$ onto the normal vector $s$ is 
 >> $$
 >> Proj_{h\rightarrow s} = \frac{h \cdot s}{\|s\|} = \frac{[x_1 - x_0, y_1 - y_0] \cdot [\theta_1, \theta_2]}{\sqrt{\theta_1^2 + \theta_2^2}} = \frac{\theta_1 x_1 + \theta_2 y_1 - \theta_1 x_0 - \theta_2 y_0}{\sqrt{\theta_1^2 + \theta_2^2}}

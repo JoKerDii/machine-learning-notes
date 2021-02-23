@@ -8,4 +8,6 @@
   - [Large Margin as Optimization](Unit1/lec3.md)
   - [Classification & Generalization](Unit1/lec4.md)
   - [Problem 1](Unit1/prob1.md)
+- Unit 2 Linear Regression & Nonlinear Classification
+  - [Linear Regression](Unit2/lec5.md)
 - **Project Documentation**

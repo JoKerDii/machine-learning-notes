@@ -24,7 +24,7 @@ Loss_h(z)=
       1-z, & \text{if }\ z < 1
     \end{cases}
 $$
-where $z = y^{(i)}(\theta x^{(i)} + \theta_0)$.
+where $z = y^{(i)}(\theta x^{(i)} + \theta_0)$, named **agreement**.
 
 > #### **Exercise 14:**
 >
@@ -74,5 +74,8 @@ The **objective** function: (objective function = average loss (for minimizing e
 $$
 J(\theta, \theta_0) = \frac{1}{n} \sum^n_{i=1} Loss_h (y^{(i)}(\theta x^{(i)} + \theta_0)) + \frac{\lambda}{2} \|\theta\|^2
 $$
-If we have large $\lambda$, We put more importance on maximizing the margin than minimizing errors.
+* For large $\lambda$, We put more importance on maximizing the margin than minimizing errors.
+* For small $\lambda$, We put more importance on correctly classifying the points at the cost of keeping the margin boundary as closer to the decision boundary.
+
+
 
