@@ -7,7 +7,8 @@
   - [Linear Classifier & Perceptron](Unit1/lec1_2.md)
   - [Large Margin as Optimization](Unit1/lec3.md)
   - [Classification & Generalization](Unit1/lec4.md)
-  - [Problem 1](Unit1/prob1.md)
+  - [Problem 1](Unit1/noprob1.md)
 - Unit 2 Linear Regression & Nonlinear Classification
   - [Linear Regression](Unit2/lec5.md)
 - **Project Documentation**
+
