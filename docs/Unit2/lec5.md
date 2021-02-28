@@ -1,5 +1,7 @@
 # Linear Regression
 
+There are 6 topics and 1 exercise.
+
 ### Topics
 
 * Objective
@@ -74,3 +76,138 @@ The task of supervised learning is to reduce the bias and variance simultaneousl
 
 
 
+## 3. Gradient Based Approach
+
+Compute the gradient of least squared loss function as an example:
+$$
+\nabla _{\theta } (y^{(t)} - \theta x^{(t)})^2/2 = (y^{(t)} - \theta x^{(t)}) \nabla _{\theta } (y^{(t)} - \theta x^{(t)}) = (y^{(t)} - \theta x^{(t)}) x^{(t)}
+$$
+The update rule is:
+$$
+\theta = \theta + \eta (y^{(t)} - \theta x^{(t)}) x^{(t)}
+$$
+
+> #### Exercise 17
+>
+> Let $Rn(θ)$ be the least squares criterion defined by
+> $$
+> \displaystyle  R_ n(\theta )=\frac{1}{n} \sum _{t=1}^{n} \text {Loss}\left(y^{(t)} - \theta \cdot x^{(t)}\right)
+> $$
+> Which of the following is true? Choose all those apply.
+>
+> A. The least squares criterion $Rn(θ)$ is a sum of functions, one per data point.
+>
+> B. Stochastic gradient descent is slower than gradient descent.
+>
+> C. $∇θRn(θ)$ is a sum of functions, one per data point.
+>
+> > **Answer**: AC
+>
+> > **Solution**: 
+> >
+> > AC: For every point, the loss is a function of $\theta$, so the least squares criterion $R_n(\theta)$ is a sum of functions, one per data point, and thus $\nabla _{\theta } R_ n(\theta )$ is also a sum of functions one per data point.
+> >
+> > B: SGD is faster than gradient descent, that's why SGD is favorable.
+
+
+
+## 4. Closed Form Solution
+
+Here we have closed form solution because the empirical risk function happens to be a convex function. However, usually in most of the machine learning problems this would not happen.
+
+Computing the gradient of
+$$
+R_ n(\theta ) = \frac{1}{n} \sum _{t=1}^{n} \frac{(y^{(t)} - \theta \cdot x^{(t)})^2}{2},
+$$
+
+Since 
+$$
+\nabla R_ n(\theta )  = \frac{1}{n} \sum^n_{t=1} y^{(t)} x^{(t)} + \frac{1}{n} \sum^n_{t=1} \hat{\theta} \cdot x^{(t)} x^{(t)}
+$$
+As the dot product $\hat{\theta} \cdot x^{(t)}$ is a scalar, we can simply move it around
+$$
+\nabla R_ n(\theta )  = \frac{1}{n} \sum^n_{t=1} y^{(t)} x^{(t)} + \frac{1}{n} \sum^n_{t=1} x^{(t)}\hat{\theta} \cdot x^{(t)}
+$$
+Note that $\theta \cdot x = x^T \theta$, we get
+$$
+\nabla R_ n(\theta )  = \frac{1}{n} \sum^n_{t=1} y^{(t)} x^{(t)} + \frac{1}{n} \sum^n_{t=1} x^{(t)} (x^{(t)})^T \hat{\theta}
+$$
+
+Finally we get: 
+$$
+\nabla R_ n(\theta ) = A\theta - b (=0) \quad \text {where } \,  A = \frac{1}{n} \sum _{t=1}^{n} x^{(t)} ( x^{(t)})^ T,\,  b = \frac{1}{n} \sum _{t=1}^{n} y^{(t)} x^{(t)}.
+$$
+
+To compute $\hat{\theta}$, we solve
+$$
+\begin{aligned}
+A\theta & = b \\
+\hat{\theta} & = A^{-1} b\\
+\end{aligned}
+$$
+The **problem** here are
+
+* Matrix $A$ is not always invertible so that it does not always have a unique solution. [Note that $A$ is invertible if vectors $x^{(1)}, ...,x^{(n)}$ span $R^d$, (n>>d)]. 
+* We must have enough training set for this operation to work. 
+* The computational cost is $O(d^3)$ which is very high.
+
+
+
+## 5. Generalization and Regularization
+
+The loss function is defined as
+$$
+J_{n, \lambda } (\theta , \theta _0) = \frac{1}{n} \sum _{t=1}^{n} \frac{(y^{(t)} - \theta \cdot x^{(t)})^2}{2} + \frac{\lambda }{2} \left\|  \theta  \right\| ^2
+$$
+Apply gradient descent:
+$$
+\nabla_\theta (\frac{\lambda}{2} \| \theta\|^2 + (y^{(t)} - \theta x^{(t)})^2/2) = \lambda \theta - (y^{(t)} - \theta x^{(t)}) x^{(t)}
+$$
+The update rule is 
+$$
+\theta = \theta - \eta(\lambda \theta - (y^{(t)} - \theta x^{(t)})x^{(t)}) = (1-\eta \lambda) \theta + \eta(y^{(t)} - \theta x^{(t)}) x^{(t)}
+$$
+
+## 6. Equivalence of regularization to a Gaussian Prior on Weights
+
+The regularized linear regression can be interpreted from a probabilistic point of view. Suppose we are fitting a linear regression model with $n$ data points $(x_1,y_1),(x_2,y_2),...,(x_n,y_n)$. Let's assume the ground truth is that $y$ is linearly related to $x$ but we also observed some noise $ϵ$ for $y$:
+$$
+y_ t=\theta \cdot x_ t + \epsilon
+$$
+where $\epsilon \sim \mathcal{N}(0,\sigma ^2)$.
+
+Then the likelihood of our observed data is
+$$
+\prod _{t=1}^{n} \mathcal{N}(y_ t|\theta x_ t, \sigma ^2).
+$$
+Now, if we impose a Gaussian prior $\mathcal{N}(\theta |0,\lambda ^{-1})$, the likelihood will change to
+$$
+\prod _{t=1}^{n} \mathcal{N}(y_ t|\theta x_ t, \sigma ^2)\mathcal{N}(\theta |0, \lambda ^{-1}).
+$$
+Take the logarithm of the likelihood, we will end up with
+$$
+\sum _{t=1}^{n} -\frac{1}{2 \sigma ^2}(y_ t-\theta x_ t)^2-\frac{1}{2}\lambda \| \theta \| ^2 + \text {constant}.
+$$
+Take the derivative and set it to 0:
+$$
+\frac{1}{\sigma^2} (y_t - \theta x_t) x_t - \lambda \theta = 0
+$$
+We get
+$$
+\hat{\theta} = \frac{y_t x_t}{x_t x_t^T + \sigma^2 \lambda}
+$$
+Thus we can conclude that maximizing this loglikelihood equivalent to minimizing the regularized loss in the linear regression.
+
+If $\lambda \rightarrow \infty$, $\hat{\theta} \rightarrow 0$, which is an underfitting horizontal line.
+
+> Question: 
+>
+> What does larger $λ$ mean in this probabilistic interpretation?  (Think of the error decomposition)
+
+
+
+# Additional Readings
+
+A good lecture note of Tuo Zhao - Assistant Professor of CSE at Gatech
+
+https://www2.isye.gatech.edu/~tzhao80/Lectures/8803.pdf

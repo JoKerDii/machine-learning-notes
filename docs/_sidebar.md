@@ -13,5 +13,6 @@
   - [Problem 4](Unit1/prob4.md)
 - Unit 2 Linear Regression & Nonlinear Classification
   - [Linear Regression](Unit2/lec5.md)
+  - Nonlinear Classification
 - **Project Documentation**
 
