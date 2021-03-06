@@ -1,6 +1,6 @@
 # Nonlinear Classifier
 
-There are topics and questions
+There are 6 topics and 5 questions.
 
 
 
