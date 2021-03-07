@@ -227,7 +227,7 @@ $$
 > >
 > > E. $\phi(x) = exp(x)$
 > >
-> > F. $\min$ can be a kernel given correct domain $\R+$.
+> > **F. $\min$ can be a kernel given correct domain $\R+$.**
 > >
 > > Let $\mathcal{X} \subset \mathbb{R}^d$ be a compact, finite dimensional vector space. A function $K : \mathcal{X} \times \mathcal{X} \to \mathbb{R}$ is called a kernel if there exists an inner product space $V$, and a map $\varphi : \mathcal{X}  \to V$, such that $K(x, x') = \langle \varphi(x), \varphi(x') \rangle$ for all $x,x' \in \mathcal{X}$. Note this inner product doesn't need to have anything to do with the dot product in $\R^n$ for any $n$, it is happening in $V$.
 > >
@@ -239,6 +239,7 @@ $$
 > > $$
 > > which makes $\min$ a kernel. In the question we are asked about $\mathcal{X} = \mathbb{Z}$ which is not $\R+$, so the argument does not apply.
 > >
+> > So for F, we just need $\mathcal{X}$ to be set.
 
 ## 6. The Radial Basis Kernel
 
