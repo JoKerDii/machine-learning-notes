@@ -22,6 +22,44 @@ h(x) = \frac{e^{-c}}{e^{-c}\sum _{j=0}^{k-1} e^{\theta _ j \cdot x / \tau }} \be
 $$
 A suitable choice for this fixed amount is $c = \max _ j \theta _ j \cdot x / \tau$.
 
+> > #### Problem 23: 
+> >
+> > Explain how the temperature parameter affects the probability of a sample $x^{(i)}$ being assigned a label that has a large $θ$. What about a small $θ$?
+> >
+> > A. Larger temperature leads to less variance
+> >
+> > B. Smaller temperature leads to less variance
+> >
+> > C. Smaller temperature makes the distribution more uniform
+>
+> > **Answer**: B
+>
+> > **Solution**: 
+> >
+> > **The higher the $\tau$, the 'softer' the distribution will be.**  'Softer' is that the model will basically be less confident about it's prediction. For example: 
+> >
+> > a) Sample 'hard' softmax probs : `[0.01,0.01,0.98]`
+> >
+> > b) Sample 'soft' softmax probs : `[0.2,0.2,0.6]`
+> >
+> > In the case of 'a', which is a 'harder' distribution. The model is very confident about it's predictions. However, in many real cases, this confident model is not preferred. For example, if you are using an RNN to generate text, you are basically sampling from your output distribution and choosing the sampled word as your output token (and next input). IF your model is extremely confident, it may produce very repetitive and uninteresting text. You want it to produce more diverse text which it will not produce because when the sampling procedure is going on, most of the probability mass will be concentrated in a few tokens and thus your model will keep selecting a number of words over and over again. In order to give other words a chance of being sampled as well, you could plug in the temperature variable and produce more diverse text.
+> >
+> > The reason why higher temperatures lead to softer distributions is about the property of exponential function. The temperature parameter penalizes bigger logits more than the smaller logits. The exponential function is an 'increasing function'. So if a term is already big, penalizing it by a small amount would make it much smaller (% wise) than if that term was small. For example:
+> >
+> > We have: 
+> >
+> > `exp(6) ~ 403`
+> >
+> > `exp(3) ~ 20`
+> >
+> > Now let's 'penalize' this term with a temperature of 1.5:
+> >
+> > `exp(6/1.5) ~ 54`
+> >
+> > `exp(3/1.5) ~ 7.4`
+> >
+> > In % terms, the bigger the term is, the more it shrinks when the temperature is used to penalize it. When the bigger logits shrink more than your smaller logits, more probability mass (to be computed by the softmax) will be assigned to the smaller logits.
+
 ## 3. Cost Function
 
 The following cost function $J(\theta)$ computes the total cost over every data point (using natural log)
@@ -55,15 +93,35 @@ $$
 $$
 Plug this into the derivative of $J(\theta)$ we have
 $$
-\begin{align}
+\begin{aligned}
 \frac{\partial J(\theta )}{\partial \theta _ m} & = \frac{\partial }{\partial \theta _ m}\Bigg[-\frac{1}{n}\Bigg[\sum _{i=1}^ n \sum _{j=0}^{k-1} [[y^{(i)} == j]] \log p(y^{(i)} = j | x^{(i)}, \theta ) \Bigg] + \frac{\lambda }{2}\sum _{j=0}^{k-1}\sum _{i=0}^{d-1} \theta _{ji}^2\Bigg] \\
 & = -\frac{1}{\tau n} \sum _{i = 1} ^{n} [x^{(i)}([[y^{(i)} == m]] - p(y^{(i)} = m | x^{(i)}, \theta ))] + \lambda \theta _ m
-\end{align}
+\end{aligned}
 $$
 To run the gradient descent, we will update $\theta$ at each step with $\theta \leftarrow \theta - \alpha \nabla _{\theta } J(\theta )$, where $\alpha$ is the learning rate.
 
+## 5. Principal Components Analysis (PCA)
 
+**PCA** is the most popular method for linear dimension reduction of data. It finds (orthogonal) direction of maximal variation in the data.  By projecting an $n×d$ dataset $X$  onto $k≤d$ of these directions, we get a new dataset of lower dimension that reflects more variation in the original data than any other $k$-dimensional linear projection of $X$. By going through some linear algebra, it can be proven that these directions are equal to the $k$ eigenvectors corresponding to the $k$ largest eigenvalues of the covariance matrix $\widetilde{X}^ T \widetilde{X}$, where $\widetilde{X}$ is a centered version of our original data.
 
+#### Project onto Principal Components
+
+Note that to project a given $n×d$ dataset $X$ into its $k$-dimensional PCA representation, one can use matrix multiplication, after first centering $X$:
+$$
+\widetilde{X} V
+$$
+where $\widetilde{X}$ is the centered original data $X$ using the mean learned from training data, and $V$ is the $d \times k$ matrix whose columns are the top $k$ eigenvectors of $\widetilde{X}^ T \widetilde{X}$. Since the eigenvectors are of unit-norm, there is no need to divide them by their length.
+
+#### Note:
+
+**we only use the training set to determine the principal components.** It is **improper** to use the test set for anything except evaluating the accuracy of our predictive model. If the test data is used for other purposes such as selecting good features, it is possible to overfit the test set and obtain overconfident estimates of a model's performance.
+
+## 6. Cubic Feature
+
+A **cubic feature** maps an input vector $x = [x_1,\dots , x_ d]$ into a new feature vector $\phi (x)$, defined so that for any $x, x' \in \mathbb {R}^ d$:
+$$
+\phi (x)^ T \phi (x') = (x^ T x' + 1)^3
+$$
 
 
 # Additional Readings
@@ -72,3 +130,5 @@ About softmax function:
 
 http://ufldl.stanford.edu/tutorial/supervised/SoftmaxRegression/
 
+About PCA:
+https://online.stat.psu.edu/stat505/lesson/11

@@ -233,9 +233,9 @@ $$
 > >
 > > To see that $\min$ is a kernel, let us define $\mathcal{X} = \mathbb{R_{+}}$ and $V = L_2(\mathcal{X})$ the square-integrable functions on $\mathcal{X}$, and finally $\varphi(x) = \mathbb{1}_{[0, x]}$, the function which is 1 when its argument is in $[0,x]$, and 0 otherwise. $V$ is an inner product pace with the following inner product: $\langle f, g \rangle = \int_0^\infty f(t) g(t) dt$. Then, we have
 > > $$
-> > \begin{align}
+> > \begin{aligned}
 > > K(x, y) &= \langle \mathbb{1}_{[0, x]}, \mathbb{1}_{[0, y]} \rangle \\ &= \int_0^\infty \mathbb{1}_{[0, x]}(t) \mathbb{1}_{[0, y]}(t) dt \\ &= \int_0^{\min(x, y)} 1 dt\\ &= \min(x, y)
-> > \end{align}
+> > \end{aligned}
 > > $$
 > > which makes $\min$ a kernel. In the question we are asked about $\mathcal{X} = \mathbb{Z}$ which is not $\R+$, so the argument does not apply.
 > >
