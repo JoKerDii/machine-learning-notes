@@ -15,6 +15,9 @@
   - [Linear Regression](Unit2/lec5.md)
   - [Nonlinear Classification](Unit2/lec6.md)
   - [Recommender System](Unit2/lec7.md)
+  - [Problem 1](Unit2/prob1.md)
+  - [Problem 2](Unit2/prob2.md)
+  - [Problem 3](Unit2/prob3.md)
   - [Project Related](Unit2/model.md)
 - **Project Documentation**
 

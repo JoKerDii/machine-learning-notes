@@ -1,5 +1,7 @@
 # Implementation Ideas
 
+There are 7 topics and 1 exercise.
+
 ## 1. Closed Form Solution of Linear Regression
 
 To solve the linear regression problem, the closed form solution is
@@ -22,7 +24,7 @@ h(x) = \frac{e^{-c}}{e^{-c}\sum _{j=0}^{k-1} e^{\theta _ j \cdot x / \tau }} \be
 $$
 A suitable choice for this fixed amount is $c = \max _ j \theta _ j \cdot x / \tau$.
 
-> > #### Problem 23: 
+> > #### Exercise 23: 
 > >
 > > Explain how the temperature parameter affects the probability of a sample $x^{(i)}$ being assigned a label that has a large $θ$. What about a small $θ$?
 > >
@@ -122,6 +124,46 @@ A **cubic feature** maps an input vector $x = [x_1,\dots , x_ d]$ into a new fea
 $$
 \phi (x)^ T \phi (x') = (x^ T x' + 1)^3
 $$
+
+## 7. Kernel Method
+
+In the **kernel perceptron algorithm**, the weights $\theta$ can be represented by a linear combination of features 
+$$
+\theta = \sum _{i=1}^{n} \alpha ^{(i)} y^{(i)} \phi (x^{(i)})
+$$
+In the **softmax regression formulation**, we can also apply this representation of the weights
+$$
+\theta _ j = \sum _{i=1}^{n} \alpha _{j}^{(i)} y^{(i)} \phi (x^{(i)})\\
+h(x) = \frac{1}{\sum _{j=1}^ k e^{[\theta _ j \cdot \phi (x) / \tau ] - c}} \begin{bmatrix}  e^{[\theta _1 \cdot \phi (x) / \tau ] - c} \\ e^{[\theta _2 \cdot \phi (x) / \tau ] - c} \\ \vdots \\ e^{[\theta _ k \cdot \phi (x) / \tau ] - c} \end{bmatrix}\\
+h(x) = \frac{1}{\sum _{j=1}^ k e^{[\sum _{i=1}^{n} \alpha _{j}^{(i)} y^{(i)} \phi (x^{(i)}) \cdot \phi (x) / \tau ] - c}} \begin{bmatrix}  e^{[\sum _{i=1}^{n} \alpha _{1}^{(i)} y^{(i)} \phi (x^{(i)}) \cdot \phi (x) / \tau ] - c} \\ e^{[\sum _{i=1}^{n} \alpha _{2}^{(i)} y^{(i)} \phi (x^{(i)}) \cdot \phi (x) / \tau ] - c} \\ \vdots \\ e^{[\sum _{i=1}^{n} \alpha _{k}^{(i)} y^{(i)} \phi (x^{(i)}) \cdot \phi (x) / \tau ] - c} \end{bmatrix}
+$$
+We need the inner product between two features after mapping $\phi (x_ i) \cdot \phi (x)$, but not the real mapping $\phi(x)$, where $x_i$ is a point in the training set and $x$ is the new data point for which we want to compute the probability. If we can create a kernel function $K(x,y) = \phi (x) \cdot \phi (y)$ for any two points $x$ and $y$, we can then kernelize our softmax regression algorithm.
+
+#### An example of polynomial kernel
+
+Suppose we map the features into $d$ dimensional polynomial space,
+$$
+\phi (x) = \langle x_ d^2, \ldots , x_1^2, \sqrt{2} x_ d x_{d-1}, \ldots , \sqrt{2} x_ d x_1, \sqrt{2} x_{d-1} x_{d-2}, \ldots , \sqrt{2} x_{d-1} x_{1}, \ldots , \sqrt{2} x_{2} x_{1}, \sqrt{2c} x_ d, \ldots , \sqrt{2c} x_1, c \rangle
+$$
+The polynomial kernel between two matrices $X$ and $Y$:
+$$
+K(x, y) = (\langle x, y \rangle + c)^p
+$$
+where $c$ is a scalar coefficient to trade off high-order and low-order terms, and $p$ is the degree of the polynomial kernel.
+
+#### An example of Gaussian RBF Kernel
+
+The Gaussian RBF kernel between $X$ and $Y$:
+$$
+K(x, y) = exp(-\gamma ||x-y||^2)
+$$
+where the squared pairwise Euclidean distances can be written into a simpler form
+$$
+\begin{aligned}
+||x-y||^2 &= (x_1-y_1)^2 + (x_2-y_2)^2 + \ldots + (x_n-y_n)^2 \\ &= x_1^2+y_1^2-2x_1y_1 + \ldots + x_n^2+y_n^2-2x_ny_n \\&= x \cdot x + y \cdot y – 2x \cdot y\end{aligned}
+$$
+If the matrix $X$ is of size $N \times M$, and the matrix $Y$ is of size $K \times M$, then the distance matrix $D$ will be $N \times K$. The value of the entry in the $i$th row and $j$th column of $D$, is the distance between the $i$th row vector in $X$ and $j$th vector in $Y$.
+
 
 
 # Additional Readings
