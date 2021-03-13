@@ -2,7 +2,7 @@
 
 There are 6 topics and 1 exercise.
 
-### Topics
+### Key Points
 
 * Objective
 * Learning algorithm

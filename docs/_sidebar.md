@@ -19,5 +19,9 @@
   - [Problem 2](Unit2/prob2.md)
   - [Problem 3](Unit2/prob3.md)
   - [Project Related](Unit2/model.md)
+- Unit 3 Neural Networks
+  - [Feedforward Neural Networks](Unit3/lec8_9.md)
+- Appendix 1: Linear Algebra
+  - [Part 1](Appendix-LA/part1.md)
 - **Project Documentation**
 
