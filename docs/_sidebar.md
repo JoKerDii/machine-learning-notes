@@ -24,5 +24,6 @@
   - [Recurrent Neural Network](Unit3/lec10.md)
 - Appendix 1: Linear Algebra
   - [Part 1](Appendix-LA/part1.md)
+  - [Part 2](Appendix-LA/part2.md)
 - **Project Documentation**
 
