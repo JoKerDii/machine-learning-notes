@@ -21,6 +21,7 @@
   - [Project Related](Unit2/model.md)
 - Unit 3 Neural Networks
   - [Feedforward Neural Networks](Unit3/lec8_9.md)
+  - [Recurrent Neural Network](Unit3/lec10.md)
 - Appendix 1: Linear Algebra
   - [Part 1](Appendix-LA/part1.md)
 - **Project Documentation**
