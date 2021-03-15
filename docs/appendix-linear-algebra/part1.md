@@ -45,7 +45,7 @@ By factoring $A$ into $C$ times $R$, we can get:
 > ####  Example 2:
 >
 > $$
-> A = \begin{bmatrix}  2~~~1~~~3\\ 3~~~1~~~4 \\ 5~~~7~~~12 \end{bmatrix} = \begin{bmatrix}  2~~~1\\ 3~~~1 \\ 5~~~7 \end{bmatrix} \begin{bmatrix}  1~~~0~~~1\\ 0~~~1~~~1 \end{bmatrix} = CR
+> A = \begin{bmatrix}  2&1&3\\ 3&1&4 \\ 5&7&12 \end{bmatrix} = \begin{bmatrix}  2&1\\ 3&1 \\ 5&7 \end{bmatrix} \begin{bmatrix}  1&0&1\\ 0&1&1 \end{bmatrix} = CR
 > $$
 >
 > $C = \begin{bmatrix}  2~~~1\\ 3~~~1 \\ 5~~~7 \end{bmatrix}$ is the column space. Each column of it is the basis for the column space of $A$.  Each row of $\begin{bmatrix}  1~~~0~~~1\\ 0~~~1~~~1 \end{bmatrix}$ is the basis for the row space. Two columns in $C$ corresponds to two rows in $R$. This proves that row rank equals column rank. 
@@ -81,7 +81,6 @@ M & = (C^TC)^{-1}(C^TAR^T)(RR^T)^{-1}
 $$
 *Recall that the computation of **inverse**: (an example of 2 by 2 matrix)
 $$
-\begin{bmatrix}  a~~~b\\ c~~~d \end{bmatrix}^{-1} = \frac{1}{ad-bc}\begin{bmatrix}  d~-b\\ -c~~~a \end{bmatrix}
+\begin{bmatrix}  a~~~b\\ c~~~d \end{bmatrix}^{-1} = \frac{1}{ad-bc}\begin{bmatrix}  d&-b\\ -c&a \end{bmatrix}
 $$
-
 

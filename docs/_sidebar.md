@@ -23,7 +23,7 @@
   - [Feedforward Neural Networks](Unit3/lec8_9.md)
   - [Recurrent Neural Network](Unit3/lec10.md)
 - Appendix 1: Linear Algebra
-  - [Part 1](Appendix-LA/part1.md)
-  - [Part 2](Appendix-LA/part2.md)
+  - [Part 1](appendix-linear-algebra/part1.md)
+  - [Part 2](appendix-linear-algebra/part2.md)
 - **Project Documentation**
 

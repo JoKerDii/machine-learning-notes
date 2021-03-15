@@ -1,6 +1,6 @@
 # Recurrent Neural Networks (RNNs)
 
-There are 3 topics and 0 exercise.
+There are 5 topics and 1 exercise.
 
 ## 1. Introduction
 
@@ -55,13 +55,62 @@ where the sign $⨀$ denotes element-wise multiplication.
 
 $c_t$ represents the memory cell, and $h_t$ represents the visible state. $[c_t, h_t]$ represents the new context or state. $[c_{t-1}, h_{t-1}]$ represents the current context or state.
 
-## 4. 
+## 4. Markov Models
 
-> Exercise 28
+Markov symbols includes a start symbol ("\<beg\>"), an end symbol ("\<end\>"), and a symbol for unknown words ("UNK").
+
+The Markov model computes the probability of a sentence "\<bed\> ML course is UNK \<end\>"as
+$$
+P = p(\text{ML}|\text{<bed>})p(\text{course}|\text{ML})p(\text{is}|\text{course})p(\text{UNK}|\text{is})p(\text{<end>}|\text{UNK})
+$$
+ Since
+$$
+p_k= p(w_i=k|w_{i-1})
+$$
+
+#### Feature based Markov Model as Neural Network
+
+Given one-hot encoded feature vectors $\phi(w_{i-1}) = x$ as the input units, and the output units are the probabilities of the words, the neural network is trying to model:
+$$
+p_k= p(w_i=k|w_{i-1})
+$$
+The weighted summation of the inputs $z_k \in \R$ is represented as
+$$
+z_k = \sum_jx_jW_{jk} + W_{ok}
+$$
+The non-linear transformation need to make  $p_k \geq 0$ and $\sum_k p_k = 1$ over all possible next words.
+
+One possible transformation is **softmax** **transformation**, which exponentializes the input values and normalizes them over the output units. This constructs a softmax output layer.
+$$
+p_k = \frac{e^{z_k}}{\sum_j e^{z_j}}
+$$
+**Advantage** of Feature based Markov Model as Neural Network: 
+
+* Extendable to multi-gram language model.
+* The complexity is easily controlled by introducing hidden layers.
+* Neural networks contain a fewer number of parameters.
+
+> #### Exercise 28
 >
-> 
+> Suppose you have a word vocabulary of size 10 (including <beg> and <end>), and you were using a trigram language model to predict the next word. How many parameters would you need for a **Markov Model**? How many parameters would you need for a **feedforward neural network** that contained biases and no hidden units?
+>
+> > **Answer**: 1000; 210
+>
+> > **Solution**: 
+> >
+> > A Markov model would have 100 choices for the previous two words, and 10 choices for the next word, leading to a size of 1000. 
+> >
+> > A feedforward neural network would have an input layer of size 20 and an output layer of size 10, leading to a weight matrix of size 200. We add 10 parameters for the bias vector.
 
+## 5. RNN Decoder
 
+**Decoder** decodes a vector encoding of a sentence into another sentence. It is usually used for language translation or image annotation. 
+$$
+\begin{aligned}
+s_t & = \tanh(W^{s,s}s_{t-1} + W^{s,x}x_t)\\
+p_t & = softmax (W^{0}s_t)\\
+\end{aligned}
+$$
+As shown in the formula above, the previous output $x_t$ is fed into the next step. Unlike in encoding, at each step, an output distribution $p_t$ is produced in a decoding RNN. In other words, the probability distribution is different at each step. With the probability distribution at each step, the output word is then sampled from the distribution.
 
-
-
+When doing prediction with testing data, the sampled outputs are used at one time step as the input for the next step.
