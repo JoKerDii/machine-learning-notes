@@ -51,8 +51,15 @@ where the sign $⨀$ denotes element-wise multiplication.
 
 ![rnns](../assets/images/U3/Lec10.jpg)
 
-<img src="../assets/images/U3/Lec10_1.jpg" alt="lstm" style="zoom:67%; text-align:center;" />
-
+$$
+\begin{aligned}
+f_t & = sigmoid(W^{f,h}h_{t-1} + W^{f,x}x_t) \text{ : forget gate}\\
+i_t & = sigmoid(W^{i,h}h_{t-1} + W^{i,x}x_t) \text{ : input gate}\\
+o_t & = sigmoid(W^{o,h}h_{t-1} + W^{o,x}x_t) \text{ : output gate}\\
+c_t & = f_t \odot c_{t-1} + i_t \odot \tanh(W^{c,h} h_{t-1} + W^{c,x}x_t) \text{ : memory cell}\\
+h_t & = o_t \odot \tanh(c_t) \text{ : visible state}\\
+\end{aligned}
+$$
 $c_t$ represents the memory cell, and $h_t$ represents the visible state. $[c_t, h_t]$ represents the new context or state. $[c_{t-1}, h_{t-1}]$ represents the current context or state.
 
 ## 4. Markov Models
