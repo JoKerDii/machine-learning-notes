@@ -1,5 +1,5 @@
 # Overview
 
-Thank to my messy notes help me struggle with mathematics of machine learning. - Di
+This is Di's notebook of "MITx 6.86x **Machine Learning with Python-From Linear Models to Deep Learning**" course on edX.
 
 ![intro](../assets/images/intro.jpeg)
