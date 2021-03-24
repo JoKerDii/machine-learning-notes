@@ -49,3 +49,12 @@ li.active>a {
 .responsive-wrap iframe{
   max-width: 100%;
 }
+
+
+.sidebar-nav li.active>a{
+  border-color: #2384a1;
+}
+
+.markdown-section blockquote{
+  border-color: #2384a1;
+}

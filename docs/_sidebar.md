@@ -23,5 +23,6 @@
   - [Feedforward Neural Networks](Unit3/lec8_9.md)
   - [Recurrent Neural Network](Unit3/lec10_11.md)
   - [Convolutional Neural Network](Unit3/lec12.md)
+  - [Problem 1](Unit3/prob1.md)
 - **Project Documentation**
 
