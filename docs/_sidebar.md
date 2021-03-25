@@ -24,5 +24,7 @@
   - [Recurrent Neural Network](Unit3/lec10_11.md)
   - [Convolutional Neural Network](Unit3/lec12.md)
   - [Problem 1](Unit3/prob1.md)
+- Unit 4 Unsupervised Learning
+  * [Clustering](Unit4/lec13_14.md)
 - **Project Documentation**
 
