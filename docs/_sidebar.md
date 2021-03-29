@@ -26,5 +26,7 @@
   - [Problem 1](Unit3/prob1.md)
 - Unit 4 Unsupervised Learning
   * [Clustering](Unit4/lec13_14.md)
+  * [Generative Models](Unit4/lec15.md)
+  * [Mixture Models; EM Algorithm](Unit4/lec16.md)
 - **Project Documentation**
 
