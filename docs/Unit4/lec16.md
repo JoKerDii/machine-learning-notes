@@ -182,8 +182,6 @@ The E and M steps are repeated iteratively until there is no noticeable change i
 > > \ell (\mathbf x^{(1)},\dots ,\mathbf x^{(n)} \mid \theta ) = \sum_{i = 1}^5\log[p_1 \mathcal{N}(x^i; \mu^1, \sigma_1^2) + p_2 \mathcal{N}(x^i; \mu^2, \sigma_2^2)]
 > > $$
 
-
-
 > #### Exercise 39
 >
 > Which of the following statements are true?
@@ -203,6 +201,11 @@ The E and M steps are repeated iteratively until there is no noticeable change i
 > > B. The EM algorithm is guaranteed (under some conditions) to only **converge** **locally**.
 > >
 > > C. We can see that the E-step of the algorithm takes $O(nKd)$ computations and the M-step of the algorithm is also of the order $O(nKd)$.
+
+## 5. Comments
+
+* EM algorithm is like "Chicken and Egg Problem". We need $(\mu_j, \sigma_j^2)$ to estimate the posterior probability $p(j|i)$ of which cluster each point $x_i$ belongs to. And we need to know the positions of $x_i$ to estimate $(\mu_j, \sigma_j^2)$ of each cluster.
+* EM algorithm goes through (1) starting with random Gaussians (2) assigning each point a probability of belonging to each cluster $p(j|i)$ (3) using the probabilities to adjust $(\mu_j, \sigma_j^2)$ to fit points better (4) iterating until convergence. This usage of "**probability**" is why EM algorithm is called "soft clustering", different from "hard clustering" - K-means, which assigns the positions of data points directly.
 
 
 

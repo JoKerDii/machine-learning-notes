@@ -29,5 +29,7 @@
   * [Generative Models](Unit4/lec15.md)
   * [Mixture Models; EM Algorithm](Unit4/lec16.md)
   * [Project Related](Unit4/project.md)
+- Unit 5 Reinforcement Learning
+  - [Intro to RL](Unit5/lec17.md)
 - **Project Documentation**
 
