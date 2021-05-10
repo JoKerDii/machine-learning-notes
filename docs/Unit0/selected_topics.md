@@ -203,9 +203,9 @@ A twice-differentiable function $f:I→R$, where $I$ is a subset of $R$, is **st
 >
 > D. $f_4(x) = x^2$ on $R$ 
 >
-> > Answer: BC
+> > **Answer**: BC
 >
-> > Solution:
+> > **Solution**:
 > >
 > > A. $f_1(x)=x$ is **not** strictly concave because $f_1''(x)=0$.
 > >
@@ -395,7 +395,7 @@ The **sum of the eigenvalues** is always equal to the **trace** of the matrix.
 >
 > > **Answer**: Yes ; ABE
 >
-> > **s**: 
+> > **Solution**: 
 > >
 > > If a vector $v$ is in the nullspace of $A$, then $Av=0=(0)v$. So it is an eigenvector of $A$ associated to the eigenvalue 0.
 > >

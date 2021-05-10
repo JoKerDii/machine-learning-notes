@@ -207,9 +207,27 @@ The E and M steps are repeated iteratively until there is no noticeable change i
 * EM algorithm is like "Chicken and Egg Problem". We need $(\mu_j, \sigma_j^2)$ to estimate the posterior probability $p(j|i)$ of which cluster each point $x_i$ belongs to. And we need to know the positions of $x_i$ to estimate $(\mu_j, \sigma_j^2)$ of each cluster.
 * EM algorithm goes through (1) starting with random Gaussians (2) assigning each point a probability of belonging to each cluster $p(j|i)$ (3) using the probabilities to adjust $(\mu_j, \sigma_j^2)$ to fit points better (4) iterating until convergence. This usage of "**probability**" is why EM algorithm is called "soft clustering", different from "hard clustering" - K-means, which assigns the positions of data points directly.
 
+## 6. Properties of EM
 
+Appealing properties:
+
+* It is numerically stable with each EM iteration increasing the likelihood.
+* Under fairly general conditions, it has reliable global convergence.
+* It is easily implemented, analytically and computationally. In particular, it is generally easy to program and requires small storage space. By watching the monotone increase in likelihood (if evaluated easily) over iterations, it is easy to monitor convergence and programming errors
+* The cost per iteration is generally low, which can offset the larger number of iterations needed for the EM algorithm compared to other competing procedures.
+* It can be used to provide estimates of missing data.
+
+Drawbacks:
+
+* It does not automatically provide an estimate of the covariance matrix of the parameter estimates. However, this disadvantage can be easily removed by using appropriate methodology associated with the EM algorithm.
+* It is sometimes very slow to converge.
+* In some problems, the E- or M-steps may be analytically intractable
 
 # Additional Readings
+
+Good demonstration:
+
+http://ethen8181.github.io/machine-learning/clustering/GMM/GMM.html
 
 Relevant materials from 
 
@@ -218,3 +236,6 @@ http://www.cs.cmu.edu/~aarti/Class/10701/
 And also other excellent course materials from
 
 http://www.cs.cmu.edu/~aarti/
+
+
+
